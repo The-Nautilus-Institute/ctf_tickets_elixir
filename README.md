@@ -1,6 +1,7 @@
-# CtfTickets
+# CtfTickets Elixir
 
-**TODO: Add description**
+Support for Nautilus Institute CTF Tickets and receipts.
+Should be compatible with the Ruby version.
 
 ## Installation
 
@@ -18,4 +19,3 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/ctf_tickets>.
-
