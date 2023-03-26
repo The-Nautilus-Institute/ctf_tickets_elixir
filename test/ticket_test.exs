@@ -18,6 +18,7 @@ defmodule TicketTest do
     d_ticket = CtfTickets.Ticket.deserialize(ctx[:secret_key], serialized)
 
     assert ctx[:slug] == d_ticket.slug
+    assert ctx[:seed] == d_ticket.seed
   end
 
   setup _context do
