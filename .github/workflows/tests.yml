@@ -50,5 +50,5 @@ jobs:
       with:
         path: |
           deps
-          _build/dev/*.plt
+          _build/dev/*.plt*
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
