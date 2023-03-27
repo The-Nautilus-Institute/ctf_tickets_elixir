@@ -1,7 +1,7 @@
 defmodule CtfTickets.Ticket do
-  defstruct slug: nil,
+  defstruct secret_key: nil,
+            slug: nil,
             seed: nil,
-            secret_key: nil,
             serialized: nil
 
   @type t :: %__MODULE__{
@@ -22,9 +22,9 @@ defmodule CtfTickets.Ticket do
 
   # ' # fix regex
 
-  @spec initialize(slug :: String.t(), secret_key :: binary()) :: __MODULE__.t()
-  def initialize(slug, secret_key) do
-    initialize(slug, secret_key, CtfTickets.mk_seed())
+  @spec initialize(secret_key :: binary(), slug :: String.t()) :: __MODULE__.t()
+  def initialize(secret_key, slug) do
+    initialize(secret_key, slug, CtfTickets.mk_seed())
   end
 
   @spec initialize(
@@ -89,7 +89,14 @@ defmodule CtfTickets.Ticket do
     nonce = CtfTickets.mk_nonce()
     blob = CtfTickets.encrypt(seed_bin, slug, nonce, secret_key)
 
-    ["ticket{", slug, ":", Base.url_encode64(nonce), Base.url_encode64(blob), "}"]
+    [
+      "ticket{",
+      slug,
+      ":",
+      Base.url_encode64(nonce, padding: false),
+      Base.url_encode64(blob, padding: false),
+      "}"
+    ]
     |> Enum.join()
   end
 end

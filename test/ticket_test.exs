@@ -21,7 +21,7 @@ defmodule TicketTest do
     assert ctx[:seed] == d_ticket.seed
   end
 
-  setup _context do
+  setup do
     [secret_key: CtfTickets.mk_key(), seed: CtfTickets.mk_seed(), slug: mk_slug()]
   end
 
