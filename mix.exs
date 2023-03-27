@@ -33,6 +33,7 @@ defmodule CtfTickets.MixProject do
     [
       licenses: ["nautilus institute license"],
       description: "tickets and receipts for nautilus quals",
-      links: ["https://nautilus.institute"]]
+      links: ["https://nautilus.institute"]
+    ]
   end
 end
