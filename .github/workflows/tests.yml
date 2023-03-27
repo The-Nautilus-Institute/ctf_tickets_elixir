@@ -52,3 +52,10 @@ jobs:
           deps
           _build/dev/*.plt*
         key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+    - name: Build package
+      run: mix hex.build
+    - name: Archive packge
+      uses: actions/upload-artifact@v3
+      with:
+        name: mix package
+        path: ctf_tickets-*.tar
