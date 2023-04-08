@@ -57,5 +57,5 @@ jobs:
     - name: Archive packge
       uses: actions/upload-artifact@v3
       with:
-        name: mix package
+        name: ctf_tickets
         path: ctf_tickets-*.tar
