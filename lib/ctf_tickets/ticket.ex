@@ -66,9 +66,9 @@ defmodule CtfTickets.Ticket do
          %{"slug" => slug, "nonce" => nonce_u64, "blob" => blob_u64},
          secret_key
        ) do
-    with {:ok, nonce} = Base.url_decode64(nonce_u64),
-         {:ok, blob} = Base.url_decode64(blob_u64),
-         <<seed::big-integer-unsigned-size(64)>> =
+    with {:ok, nonce} <- Base.url_decode64(nonce_u64),
+         {:ok, blob} <- Base.url_decode64(blob_u64),
+         <<seed::big-integer-signed-size(64)>> <-
            CtfTickets.decrypt(blob, slug, nonce, secret_key) do
       # seed  'Q>' 64-bit uint big-endian
 
