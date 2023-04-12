@@ -6,7 +6,8 @@ defmodule CtfTickets do
   @cipher :libsodium_crypto_aead_chacha20poly1305
   @nonce_len @cipher.ietf_npubbytes()
   @key_len @cipher.ietf_keybytes()
-  @max_seed 2 ** 64 - 1
+  @max_seed 2 ** 63 - 1
+  @min_seed 0 - (2 ** 63)
 
   @spec encrypt(
           plaintext :: binary(),
@@ -34,11 +35,11 @@ defmodule CtfTickets do
   @spec key_len :: non_neg_integer()
   def key_len, do: @key_len
 
-  @spec max_seed :: pos_integer()
-  def max_seed, do: @max_seed
+  @spec seed_gamut :: pos_integer()
+  def seed_gamut, do: @max_seed - @min_seed
 
   @spec mk_seed :: non_neg_integer()
-  def mk_seed, do: :rand.uniform(max_seed() + 1)
+  def mk_seed, do: :rand.uniform(seed_gamut() + 1) + @min_seed
 
   @spec mk_nonce :: binary()
   def mk_nonce, do: :crypto.strong_rand_bytes(nonce_len())

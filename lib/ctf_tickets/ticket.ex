@@ -6,7 +6,7 @@ defmodule CtfTickets.Ticket do
 
   @type t :: %__MODULE__{
           slug: String.t(),
-          seed: non_neg_integer(),
+          seed: integer(),
           secret_key: binary(),
           serialized: String.t() | nil
         }
@@ -30,7 +30,7 @@ defmodule CtfTickets.Ticket do
   @spec initialize(
           secret_key :: binary(),
           slug :: String.t(),
-          seed :: non_neg_integer()
+          seed :: integer()
         ) :: __MODULE__.t()
   def initialize(secret_key, slug, seed) do
     %__MODULE__{slug: slug, secret_key: secret_key, seed: seed}
@@ -85,7 +85,7 @@ defmodule CtfTickets.Ticket do
   end
 
   def serialize(%__MODULE__{slug: slug, seed: seed, secret_key: secret_key}) do
-    seed_bin = <<seed::big-integer-unsigned-size(64)>>
+    seed_bin = <<seed::big-integer-signed-size(64)>>
     nonce = CtfTickets.mk_nonce()
     blob = CtfTickets.encrypt(seed_bin, slug, nonce, secret_key)
 
