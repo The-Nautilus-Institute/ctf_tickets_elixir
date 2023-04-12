@@ -7,7 +7,7 @@ defmodule CtfTickets do
   @nonce_len @cipher.ietf_npubbytes()
   @key_len @cipher.ietf_keybytes()
   @max_seed 2 ** 63 - 1
-  @min_seed 0 - (2 ** 63)
+  @min_seed 0 - 2 ** 63
 
   @spec encrypt(
           plaintext :: binary(),
